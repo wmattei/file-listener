@@ -16,6 +16,7 @@ export const <pascal_name> = ({ classes, variant, opacity }) => (
 );
 """.replace("<pascal_name>", pascal_name).replace("<file_name>", filename)
 
+
 class Watcher:
 
     def __init__(self):
@@ -51,9 +52,12 @@ class Handler(FileSystemEventHandler):
                                   0].title().replace('-', '').replace('_', '') if not x.isspace())
             icon = get_template(file_name, pascal_case)
 
-            with open(DIRECTORY_TO_ICON_FILE, "a") as myfile:
-                myfile.write(icon)
-            print("Received created event - %s." % event.src_path)
+            with open(DIRECTORY_TO_ICON_FILE, "r") as readFile:
+                if pascal_case in readFile.read():
+                    return
+                with open(DIRECTORY_TO_ICON_FILE, "a") as writeFile:
+                    writeFile.write(icon)
+                    print("Received created event - %s." % event.src_path)
 
         # TODO when deleting find the string and remove from file
         # elif event.event_type == 'deleted':
