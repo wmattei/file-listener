@@ -11,11 +11,9 @@ DIRECTORY_TO_ICON_FILE = "/home/wagner/Documents/projects/westpoint/collums/coll
 
 def get_template(filename, pascal_name):
     return """
-/*eslint-disable */
 export const <pascal_name> = ({ classes, variant, opacity }) => (
     <IconBuilder path="<file_name>" classes={classes} variant={variant} opacity={opacity} />
 );
-/*eslint-enable */
 """.replace("<pascal_name>", pascal_name).replace("<file_name>", filename)
 
 class Watcher:
